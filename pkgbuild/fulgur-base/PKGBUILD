@@ -1,0 +1,41 @@
+# Maintainer: Brian Wilson <doc@wiltech.org>
+pkgbase='fulgur-base'
+pkgname=('fulgur-base')
+pkgver=v0.1a
+pkgrel=1
+pkgdesc="System config for Fulgur Linux systems from Wilson Technologies."
+arch=('any')
+url="https://gitlab.com/DrSpeedy/fulgur-linux"
+license=('MIT')
+groups=('fulgur-base')
+
+source=(
+    'etc.dialogrc'
+)
+
+sha256sums=('SKIP')
+
+package_mdaffin-base() {
+    provides=('vim' 'vi')
+    conflicts=('vim' 'vi')
+    #install=fulgur-base.install
+
+    depends=(
+        'bash' 'bzip2' 'coreutils' 'cryptsetup' 'device-mapper' 'dhcpcd' 'diffutils'
+        'e2fsprogs' 'file' 'filesystem' 'findutils' 'gawk' 'gcc-libs' 'gettext'
+        'glibc' 'grep' 'gzip' 'inetutils' 'iproute2' 'iputils' 'jfsutils'
+        'less' 'licenses' 'linux-lts' 'logrotate' 'lvm2' 'man-db' 'man-pages'
+        'mdadm' 'nano' 'netctl' 'pacman' 'pciutils' 'pcmciautils' 'perl'
+        'procps-ng' 'psmisc' 'reiserfsprogs' 's-nail' 'sed' 'shadow' 'sysfsutils'
+        'systemd-sysvcompat' 'tar' 'texinfo' 'usbutils' 'util-linux' 'neovim' 'which'
+        'xfsprogs' 'networkmanager' 'openssh' 'htop' 'zsh' 'zsh-syntax-highlighting'
+        'fws-zsh-config-git' 'python-neovim' 'python2-neovim' 'ranger' 'dialog' 'openvpn'
+        'ufw' 'p7zip' 'curl' 'wget' 'intel-ucode'
+    )
+
+    install -dm 0755 "${pkgdir}/usr/bin"
+    ln -s /usr/bin/nvim "${pkgdir}/usr/bin/vim"
+    ln -s /usr/bin/nvim "${pkgdir}/usr/bin/vi"
+
+    install -Dm 0644 etc.dialogrc "${pkgdir}/etc/dialogrc"
+}

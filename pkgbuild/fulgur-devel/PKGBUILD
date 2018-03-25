@@ -1,0 +1,41 @@
+# Maintainer: Brian Wilson <doc@wiltech.org>
+pkgbase='fulgur-devel'
+pkgname=('fulgur-devel' 'fulgur-devel-vagrant' 'fulgur-devel-web'
+        'fulgur-devel-embedded' 'fulgur-devel-arch-repo')
+pkgver=v0.1a
+pkgrel=1
+pkgdesc="Development packages for Fulgur Linux systems"
+arch=('any')
+url="https://gitlab.com/DrSpeedy/fulgur-linux"
+license=('MIT')
+groups=('fulgur-devel')
+
+source=()
+
+sha256sums=()
+
+package_fulgur-devel() {
+    depends=('fulgur-base' 'git' 'cmake' 'git'
+    'jq' 'autoconf' 'automake' 'binutils' 'bison' 'fakeroot' 'file'
+    'findutils' 'flex' 'gawk' 'gcc' 'gettext' 'grep' 'groff' 'gzip' 'libtool'
+    'm4' 'make' 'pacman' 'patch' 'pkg-config' 'sed' 'texinfo' 'util-linux'
+    'which' 'rsync' 'linux-lts-headers')
+}
+
+package_fulgur-devel-vagrant() {
+    depends=('fulgur-devel' 'virtualbox' 'virtualbox-host-modules-dkms'
+    'vagrant')
+}
+
+package_fulgur-devel-web() {
+    depends=('fulgur-devel' 'composer' 'php' 'nodejs' 'npn' 'nginx')
+}
+
+package_fulgur-devel-embedded() {
+    depends=('fulgur-devel' 'qemu' 'qemu-arch-extra' 'arduino' 'arduino-docs')
+    echo ":: You may need to add you user to the 'uupc' and 'lock' groups for the Aurduino IDE to function properly."
+}
+
+package_fulgur-devel-arch-repo() {
+    depends=('fulgur-devel' 'devtools' 'repose' 'aurutils')
+}

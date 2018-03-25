@@ -1,0 +1,18 @@
+# Maintainer: Brian Wilson <doc@wiltech.org>
+pkgbase='fulgur-laptop'
+pkgname=('fulgur-laptop')
+pkgver=v0.1a
+pkgrel=1
+pkgdesc="Development packages for Fulgur Linux systems"
+arch=('any')
+url="https://gitlab.com/DrSpeedy/fulgur-linux"
+license=('MIT')
+groups=('fulgur-laptop')
+
+source=()
+
+sha256sums=()
+
+package_fulgur-laptop() {
+    depends=('fulgur-desktop' 'powertop' 'upower')
+}

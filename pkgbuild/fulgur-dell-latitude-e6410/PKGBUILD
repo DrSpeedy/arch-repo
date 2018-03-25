@@ -1,0 +1,22 @@
+# Maintainer: Brian Wilson <doc@wiltech.org>
+pkgbase='fulgur-dell-latitude-e6410'
+pkgname=('fulgur-dell-latitude-e6410')
+pkgver=v0.1a
+pkgrel=1
+pkgdesc="Development packages for Fulgur Linux systems"
+arch=('any')
+url="https://gitlab.com/DrSpeedy/fulgur-linux"
+license=('MIT')
+groups=('fulgur-dell-latitude-e6410')
+
+source=('blacklist-i915-module.conf'
+        'x11-touchpad-synaptics.conf')
+
+sha256sums=('SKIP' 'SKIP')
+
+package_fulgur-dell-latitude-e6410() {
+    depends=('xorg-server xf86-input-synaptics')
+    
+    install -Dm 0644 blacklist-i915-module.conf "${pkgdir}/usr/lib/modprobe.d/blacklist.conf"
+    install -Dm 0644 x11-touchpad-synaptics.conf "${pkgdir}/etc/X11/xorg.conf.d/70-synaptics.conf"
+}

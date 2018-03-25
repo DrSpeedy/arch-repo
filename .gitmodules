@@ -1,0 +1,6 @@
+[submodule "pkgbuild/numix-circle-icon-theme-git"]
+	path = pkgbuild/numix-circle-icon-theme-git
+	url = https://aur.archlinux.org/numix-circle-icon-theme-git.git
+[submodule "pkgbuild/numix-icon-theme-git"]
+	path = pkgbuild/numix-icon-theme-git
+	url = https://aur.archlinux.org/numix-icon-theme-git.git
