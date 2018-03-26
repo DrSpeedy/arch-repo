@@ -1,8 +1,7 @@
-*.pkg.tar.xz
-*.tar.gz
-/pkgbuild/**/pkg/
-/pkgbuild/**/src/
-repo/
+pkgbuild/*/*.tar.gz
+pkgbuild/*/*.tar.xz
+pkgbuild/**/pkg/
+pkgbuild/**/src/
 *.log
-/root/
+root/
 new/
