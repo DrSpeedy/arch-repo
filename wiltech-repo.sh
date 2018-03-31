@@ -26,8 +26,7 @@ done
 repo="$(mktemp -d)"
 defer "rmdir '$repo'"
 
-sshfs -o IdentityFile=/home/doc/.ssh/id_rsa root@${SSHFS_HOST}:/var/www/html "$repo"
-#s3fs "$BUCKET" "$repo" -o "nosuid,nodev,default_acl=public-read"
+sshfs -o idmap=user,IdentityFile=/home/doc/.ssh/id_rsa root@${SSHFS_HOST}:/var/www/html "$repo"
 defer "fusermount -u '$repo'"
 
 rsync --ignore-existing -v pkgbuild/*/*.pkg.tar.xz "$repo/$REPO_PATH"
