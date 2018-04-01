@@ -1,24 +1,26 @@
 # Maintainer: Brian Wilson <doc@wiltech.org>
 pkgbase='fulgur-base'
 pkgname=('fulgur-base')
-pkgver=v0.1a
+pkgver=v0.1c
 pkgrel=1
 pkgdesc="System config for Fulgur Linux systems from Wilson Technologies."
 arch=('any')
-url="https://gitlab.com/DrSpeedy/fulgur-linux"
+url="https://gitlab.com/wiltech/fulgur-linux"
 license=('MIT')
 groups=('fulgur-base')
 
 source=(
     'etc.dialogrc'
+    'mirupgr.pachook'
 )
 
-sha256sums=('SKIP')
+sha256sums=('SKIP'
+            'SKIP'
+)
 
-package_mdaffin-base() {
+package_fulgur-base() {
     provides=('vim' 'vi')
     conflicts=('vim' 'vi')
-    #install=fulgur-base.install
 
     depends=(
         'bash' 'bzip2' 'coreutils' 'cryptsetup' 'device-mapper' 'dhcpcd' 'diffutils'
@@ -30,7 +32,8 @@ package_mdaffin-base() {
         'systemd-sysvcompat' 'tar' 'texinfo' 'usbutils' 'util-linux' 'neovim' 'which'
         'xfsprogs' 'networkmanager' 'openssh' 'htop' 'zsh' 'zsh-syntax-highlighting'
         'fws-zsh-config-git' 'python-neovim' 'python2-neovim' 'ranger' 'dialog' 'openvpn'
-        'ufw' 'p7zip' 'curl' 'wget' 'intel-ucode'
+        'ufw' 'p7zip' 'curl' 'wget' 'intel-ucode' 'reflector' 'sudo' 'ntp'
+        'networkmanager-dispatcher-ntpd'
     )
 
     install -dm 0755 "${pkgdir}/usr/bin"
@@ -38,4 +41,10 @@ package_mdaffin-base() {
     ln -s /usr/bin/nvim "${pkgdir}/usr/bin/vi"
 
     install -Dm 0644 etc.dialogrc "${pkgdir}/etc/dialogrc"
+    install -Dm 0755 mirupgr.pachook "${pkgdir}/etc/pacman.d/hooks/mirror-upgrade.hook"
+}
+
+post_install() {
+    systemctl enable NetworkManager.service
+    systemctl enable ntpd.service
 }
