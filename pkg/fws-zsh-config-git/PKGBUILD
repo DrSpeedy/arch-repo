@@ -3,7 +3,7 @@
 _pkgname=fws-zsh-config
 pkgname=$_pkgname-git
 pkgver=v0.1c
-pkgrel=2
+pkgrel=3
 pkgdesc="Fulgur Workstation zsh configuration"
 arch=('any')
 url="https://bitbucket.org/wiltech/fws-zsh-config"
@@ -15,7 +15,7 @@ optdepends=('zsh-syntax-highlighting: Syntax highlighting'
             'xfce4-terminal: Recommended terminal emulator')
 provides=("$_pkgname")
 conflicts=("$_pkgname")
-source=("$_pkgname::git+https://bitbucket.org/wiltech/fws-zsh-config.git")
+source=("$_pkgname::git+ssh://git@bitbucket.org/wiltech/fws-zsh-config.git")
 md5sums=('SKIP')
 
 prepare() {

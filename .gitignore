@@ -1,7 +1,7 @@
-pkgbuild/*/*.tar.gz
-pkgbuild/*/*.tar.xz
-pkgbuild/**/pkg/
-pkgbuild/**/src/
+pkg/*/*.tar.gz
+pkg/*/*.tar.xz
+pkg/**/pkg/
+pkg/**/src/
 *.log
 arch-root/
 new/

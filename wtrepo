@@ -127,5 +127,5 @@ repo_sync() {
     _msg_info "Synchronization done."
 }
 
+make_pkgs
 repo_sync
-#make_pkgs
