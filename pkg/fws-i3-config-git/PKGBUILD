@@ -1,9 +1,10 @@
+# Maintainer: Brian Wilson <doc@wiltech.org>
 # Fulgur Workstation rescue/dev i3-gaps configuration
 # <https://bitbucket.org/wiltech/fws-i3-config.git>
 _pkgname=fws-i3-config
 pkgname=$_pkgname-git
 pkgver=v0.1d
-pkgrel=3
+pkgrel=4
 pkgdesc="Fast deployable i3-gaps configuration designed for the Fulgur Workstation/Rescue envirornment"
 arch=('any')
 url="https://bitbucket.org/wiltech/fws-i3-config"

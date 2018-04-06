@@ -10,16 +10,16 @@ PACKAGES=${@:-pkgbuild/*}
 CHROOT="$PWD/root"
 
 SSHFS_HOST=165.227.215.148
-REPO_PATH=repo/x86_64
+REPO_PATH=repo/arch-linux/x86_64
 REPO_NAME=wiltech
 
 mkdir -p "$CHROOT"
-[[ -d "$CHROOT/root" ]] || mkarchroot -C /etc/pacman.conf $CHROOT/root base base-devel oh-my-zsh-git
+[[ -d "$CHROOT/root" ]] || mkarchroot -C /etc/pacman.conf $CHROOT/root fulgur-base fulgur-devel
 
 for package in $PACKAGES; do
     cd "$package"
     rm -f *.pkg.tar.xz
-    makechrootpkg -curn $CHROOT
+    makechrootpkg -cur $CHROOT
     cd -
 done
 

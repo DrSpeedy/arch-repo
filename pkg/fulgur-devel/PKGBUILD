@@ -2,7 +2,7 @@
 pkgbase='fulgur-devel'
 pkgname=('fulgur-devel' 'fulgur-devel-vagrant' 'fulgur-devel-web'
         'fulgur-devel-embedded' 'fulgur-devel-arch-repo')
-pkgver=v0.1a
+pkgver=v0.1b
 pkgrel=1
 pkgdesc="Development packages for Fulgur Linux systems"
 arch=('any')

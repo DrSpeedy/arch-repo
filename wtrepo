@@ -1,0 +1,131 @@
+#!/bin/bash
+set -uo pipefail
+trap 's=$?; _msg_error "$0: Error on line "$LINENO": $BASH_COMMAND" $s' ERR
+
+# Path to the directory this script is running
+# from. This value should always be the base directory of
+# the project.
+base_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Where to log output of this script
+log_file=${base_dir}/logs/$(date +'%Y-%m-%d.log')
+
+# Where pkgbuilds are stored
+pkg_dir=${base_dir}/pkg
+
+# Name of the repository database
+repo_name=wiltech
+
+# Remote repository address
+remote_host=repo.wiltech.org
+
+# Identity file used to connect to remote host via sshfs
+id_file=${HOME}/.ssh/id_rsa
+
+# Repository path on remote host
+remote_dir=/var/www/repo/arch/$(uname -m)
+
+# Pacman config to use
+pacman_conf=/etc/pacman.conf
+
+# Chroot directory
+chroot_dir=${base_dir}/arch-root
+
+# Commands to run on exit
+# Usage: defer 'echo blahblah'; defer 'echo a second echo'
+exit_cmd=""
+defer() { exit_cmd="$@; $exit_cmd"; }
+trap 'bash -c "$exit_cmd"' EXIT
+
+# Log information to file and stdout
+# $1: Message
+_msg_info() {
+    if [[ ! -f ${log_file} ]]; then
+        mkdir -p $(dirname ${log_file})
+        touch ${log_file}
+    fi
+    echo -e "[INFO] ${1}" | tee -a ${log_file}
+}
+
+# Log error information and exit script
+# $1: Error message
+# $2: Exit code
+_msg_error() {
+    if [[ ! -f ${log_file} ]]; then
+        mkdir -p $(dirname ${log_file})
+        touch ${log_file}
+    fi
+    
+}
+
+# Retrieve all dependencies from  pkgbuilds
+get_pkg_deps() {
+    depends=()
+    for _pkg in ${pkg_dir}/*; do
+        # extract package depends from pkgbuild files
+        _depends="$(awk '/^\s*depends=\(/, /\)/' ${_pkg} | sed -e 's/depends=(//g;s/)//g' | sed -e "s/'//g")"
+
+        depends+="${_depends} "
+    done
+
+    # Strip whitespace, put each dependency on a new line
+    # and remove duplicate lines
+    depends="$(echo ${depends} | sed -e 's/^[ \t]*//;s/[ \t]*$//' | tr ' ' '\n' | awk '!a[$0]++')"
+    
+    # Print dependencies to stdout
+    echo "${depends}" | sort
+}
+
+make_chroot() {
+    _msg_info "Building new chroot at ${chroot_dir}"
+    
+    mkdir -p ${chroot_dir}
+    mkarchroot -C ${pacman_conf} ${chroot_dir}/root fulgur-base fulgur-devel
+}
+
+make_pkg() {
+    # Check if chroot exists and create if it doesn't
+    if [[ ! -d ${chroot_dir}/root ]]; then
+        make_chroot
+    fi
+    
+    _pkg_name=$(awk '/^\s*pkgname=/' ${1}/PKGBUILD | sed -e 's/pkgname=//g')
+    _msg_info "Building ${_pkg_name}..."
+
+    rm -rf ${1}/*.pkg.tar.xz
+
+    cd ${1}
+    makechrootpkg -cur ${chroot_dir}
+    cd - > /dev/null
+}
+
+make_pkgs() {
+    _msg_info "Building all packages in ${pkg_dir}"
+    for _pkg in ${pkg_dir}/*; do
+        if [[ -d ${_pkg} ]]; then
+            make_pkg ${_pkg}
+        fi
+    done
+    _msg_info "Build all done."
+}
+
+repo_sync() {
+    _msg_info "Synchronizing repository..."
+    _repo=$(mktemp -d)
+    defer "rmdir ${_repo}"
+    
+    _msg_info "Mounting remote repository ${remote_host} to ${_repo}..."
+    sshfs -o idmap=user,IdentityFile=${id_file} ${remote_host}:${remote_dir} "${_repo}"
+    defer "fusermount -u ${_repo}"
+
+    _msg_info "Transfering packages..."
+    rsync --ignore-existing -v ${pkg_dir}/*/*.pkg.tar.xz "${_repo}"
+
+    _msg_info "Updating ${repo_name}..."
+    repose --verbose --xz --root="${_repo}" "${repo_name}"
+
+    _msg_info "Synchronization done."
+}
+
+repo_sync
+#make_pkgs

@@ -1,13 +1,12 @@
 # Maintainer: Brian Wilson <doc@wiltech.org>
-pkgbase='fulgur-dell-latitude-e6410'
 pkgname=('fulgur-dell-latitude-e6410')
-pkgver=v0.1a
+pkgver=v0.1b
 pkgrel=1
 pkgdesc="Development packages for Fulgur Linux systems"
 arch=('any')
 url="https://gitlab.com/DrSpeedy/fulgur-linux"
 license=('MIT')
-groups=('fulgur-dell-latitude-e6410')
+groups=()
 
 source=('blacklist-i915-module.conf'
         'x11-touchpad-synaptics.conf')

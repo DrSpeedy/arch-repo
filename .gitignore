@@ -3,5 +3,5 @@ pkgbuild/*/*.tar.xz
 pkgbuild/**/pkg/
 pkgbuild/**/src/
 *.log
-root/
+arch-root/
 new/

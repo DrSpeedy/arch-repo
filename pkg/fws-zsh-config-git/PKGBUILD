@@ -1,21 +1,21 @@
-# Brian Wilson <doc@wiltech.org>
+# Maintainer: Brian Wilson <doc@wiltech.org>
 # <https://bitbucket.org/wiltech/fws-zsh-config.git>
 _pkgname=fws-zsh-config
 pkgname=$_pkgname-git
 pkgver=v0.1c
-pkgrel=1
+pkgrel=2
 pkgdesc="Fulgur Workstation zsh configuration"
 arch=('any')
 url="https://bitbucket.org/wiltech/fws-zsh-config"
 license=('MIT')
 groups=()
 depends=(zsh oh-my-zsh-git)
-makedepends=('git sed')
+makedepends=('git' 'sed')
 optdepends=('zsh-syntax-highlighting: Syntax highlighting'
             'xfce4-terminal: Recommended terminal emulator')
 provides=("$_pkgname")
 conflicts=("$_pkgname")
-source=("$_pkgname::git+ssh://git@bitbucket.org/wiltech/fws-zsh-config.git")
+source=("$_pkgname::git+https://bitbucket.org/wiltech/fws-zsh-config.git")
 md5sums=('SKIP')
 
 prepare() {
