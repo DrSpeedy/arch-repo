@@ -44,7 +44,7 @@ _msg_info() {
         mkdir -p $(dirname ${log_file})
         touch ${log_file}
     fi
-    echo -e "[INFO] ${1}" | tee -a ${log_file}
+    echo -e ":: [INFO] ${1}" | tee -a ${log_file}
 }
 
 # Log error information and exit script
@@ -55,7 +55,8 @@ _msg_error() {
         mkdir -p $(dirname ${log_file})
         touch ${log_file}
     fi
-    
+    echo -e ":: [ERROR] ${1} (exit ${2})"
+    exit ${2}
 }
 
 # Retrieve all dependencies from  pkgbuilds
