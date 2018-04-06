@@ -64,7 +64,7 @@ get_pkg_deps() {
     depends=()
     for _pkg in ${pkg_dir}/*; do
         # extract package depends from pkgbuild files
-        _depends="$(awk '/^\s*depends=\(/, /\)/' ${_pkg} | sed -e 's/depends=(//g;s/)//g' | sed -e "s/'//g")"
+        _depends="$(awk '/^\s*depends=\(/, /\)/' ${_pkg}/PKGBUILD | sed -e 's/depends=(//g;s/)//g' | sed -e "s/'//g")"
 
         depends+="${_depends} "
     done
