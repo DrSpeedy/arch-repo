@@ -3,14 +3,17 @@
 # <https://bitbucket.org/wiltech/fws-i3-config.git>
 _pkgname=fws-i3-config
 pkgname="$_pkgname-git"
-pkgver=v0.1d
-pkgrel=4
+pkgver=v0.1e
+pkgrel=5
 pkgdesc="Fast deployable i3-gaps configuration designed for the Fulgur Workstation/Rescue envirornment"
 arch=('any')
 url="https://gitlab.com/wiltech/fws-i3-config"
 license=('MIT')
 groups=()
-depends=('xorg-server' 'xorg-xinit' 'i3-gaps' 'i3blocks' 'rofi' 'feh')
+depends=(
+    'xorg-server' 'xorg-xinit' 'i3-gaps' 'i3blocks' 'rofi' 'feh'
+    'volumeicon' 'pulseaudio' 'lm_sensors' 'xfce4-terminal'
+)
 makedepends=('git' 'sed')
 optdepends=('xfce4-power-manager: Power management'
             'networkmanager: NetworkManager support'

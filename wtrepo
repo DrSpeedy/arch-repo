@@ -129,5 +129,12 @@ repo_sync() {
     _msg_info "Synchronization done."
 }
 
-make_pkgs
+#make_pkgs
+if [[ ! -z "${1}" ]]; then
+    make_pkg "${1}"
+else
+    make_pkgs
+fi
+
+
 repo_sync

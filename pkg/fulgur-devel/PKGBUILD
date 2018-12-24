@@ -2,8 +2,8 @@
 pkgbase='fulgur-devel'
 pkgname=('fulgur-devel' 'fulgur-devel-vagrant' 'fulgur-devel-web'
         'fulgur-devel-embedded' 'fulgur-devel-arch-repo')
-pkgver=v0.1b
-pkgrel=4
+pkgver=v0.1c
+pkgrel=5
 pkgdesc="Development packages for Fulgur Linux systems"
 arch=('any')
 url="https://gitlab.com/DrSpeedy/fulgur-linux"
@@ -37,5 +37,5 @@ package_fulgur-devel-embedded() {
 }
 
 package_fulgur-devel-arch-repo() {
-    depends=('fulgur-devel' 'devtools' 'repose' 'aurutils')
+    depends=('fulgur-devel' 'devtools' 'repose' 'aurutils' 'sshfs')
 }

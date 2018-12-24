@@ -1,7 +1,7 @@
 # Maintainer: Brian Wilson <doc@wiltech.org>
 pkgname='fulgur-base'
-pkgver=v0.1d
-pkgrel=2
+pkgver=v0.1f
+pkgrel=4
 pkgdesc="System config for Fulgur Linux systems from Wilson Technologies."
 arch=('any')
 url="https://gitlab.com/wiltech/fulgur-linux"
@@ -13,8 +13,9 @@ source=(
     'mirupgr.pachook'
 )
 
-sha256sums=('SKIP'
-            'SKIP'
+sha256sums=(
+    'SKIP'
+    'SKIP'
 )
 
 package_fulgur-base() {
@@ -26,7 +27,7 @@ package_fulgur-base() {
         'e2fsprogs' 'file' 'filesystem' 'findutils' 'gawk' 'gcc-libs' 'gettext'
         'glibc' 'grep' 'gzip' 'inetutils' 'iproute2' 'iputils' 'jfsutils'
         'less' 'licenses' 'linux-lts' 'logrotate' 'lvm2' 'man-db' 'man-pages'
-        'mdadm' 'nano' 'netctl' 'pacman' 'pciutils' 'perl'
+        'mdadm' 'nano' 'netctl' 'pacman' 'pciutils' 'perl' 'sshfs' 'samba'
         'procps-ng' 'psmisc' 'reiserfsprogs' 's-nail' 'sed' 'shadow' 'sysfsutils'
         'systemd-sysvcompat' 'tar' 'texinfo' 'usbutils' 'util-linux' 'neovim' 'which'
         'xfsprogs' 'networkmanager' 'openssh' 'htop' 'zsh' 'zsh-syntax-highlighting'
