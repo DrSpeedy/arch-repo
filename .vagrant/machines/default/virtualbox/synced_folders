@@ -1,1 +1,0 @@
-{"virtualbox":{"/pkg":{"SharedFoldersEnableSymlinksCreate":false,"guestpath":"/pkg","hostpath":"/data/Development/Arch/arch-repo/pkg","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/data/Development/Arch/arch-repo","disabled":false,"__vagrantfile":true}}}
