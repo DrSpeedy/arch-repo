@@ -17,16 +17,16 @@ pkg_dir=${base_dir}/pkg
 repo_name=wiltech
 
 # Remote repository address
-remote_host=repo.wiltech.org
+remote_host=wiltech.org
 
 # Identity file used to connect to remote host via sshfs
 id_file=${HOME}/.ssh/id_rsa
 
 # Repository path on remote host
-remote_dir=/var/www/repo/arch/$(uname -m)
+remote_dir=/var/www/repo
 
 # Pacman config to use
-pacman_conf=/etc/pacman.conf
+pacman_conf=${base_dir}/pacman.conf
 
 # Chroot directory
 chroot_dir=${base_dir}/arch-root
@@ -81,7 +81,7 @@ make_chroot() {
     _msg_info "Building new chroot at ${chroot_dir}"
     
     mkdir -p ${chroot_dir}
-    mkarchroot -C ${pacman_conf} ${chroot_dir}/root fulgur-base fulgur-devel
+    mkarchroot -C ${pacman_conf} ${chroot_dir}/root base base-devel
 }
 
 make_pkg() {
@@ -94,6 +94,7 @@ make_pkg() {
     _msg_info "Building ${_pkg_name}..."
 
     rm -rf ${1}/*.pkg.tar.xz
+    rm -rf ${1}/*.log
 
     cd ${1}
     makechrootpkg -cur ${chroot_dir}

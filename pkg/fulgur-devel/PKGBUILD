@@ -3,13 +3,13 @@ pkgbase='fulgur-devel'
 pkgname=('fulgur-devel' 'fulgur-devel-vagrant' 'fulgur-devel-web'
         'fulgur-devel-embedded' 'fulgur-devel-arch-repo')
 pkgver=v0.1b
-pkgrel=1
+pkgrel=4
 pkgdesc="Development packages for Fulgur Linux systems"
 arch=('any')
 url="https://gitlab.com/DrSpeedy/fulgur-linux"
 license=('MIT')
 groups=('fulgur-devel')
-
+makedepends=('arduino' 'arduino-docs' 'aurutils' 'composer' 'devtools' 'nginx' 'nodejs' 'npm' 'php' 'qemu' 'qemu-arch-extra' 'repose' 'vagrant' 'virtualbox' 'virtualbox-host-dkms')
 source=()
 
 sha256sums=()
@@ -23,12 +23,12 @@ package_fulgur-devel() {
 }
 
 package_fulgur-devel-vagrant() {
-    depends=('fulgur-devel' 'virtualbox' 'virtualbox-host-modules-dkms'
+    depends=('fulgur-devel' 'virtualbox' 'virtualbox-host-dkms'
     'vagrant')
 }
 
 package_fulgur-devel-web() {
-    depends=('fulgur-devel' 'composer' 'php' 'nodejs' 'npn' 'nginx')
+    depends=('fulgur-devel' 'composer' 'php' 'nodejs' 'npm' 'nginx')
 }
 
 package_fulgur-devel-embedded() {

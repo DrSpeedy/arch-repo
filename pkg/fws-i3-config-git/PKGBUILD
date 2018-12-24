@@ -2,18 +2,18 @@
 # Fulgur Workstation rescue/dev i3-gaps configuration
 # <https://bitbucket.org/wiltech/fws-i3-config.git>
 _pkgname=fws-i3-config
-pkgname=$_pkgname-git
+pkgname="$_pkgname-git"
 pkgver=v0.1d
 pkgrel=4
 pkgdesc="Fast deployable i3-gaps configuration designed for the Fulgur Workstation/Rescue envirornment"
 arch=('any')
-url="https://bitbucket.org/wiltech/fws-i3-config"
+url="https://gitlab.com/wiltech/fws-i3-config"
 license=('MIT')
 groups=()
-depends=(xorg-server xorg-xinit i3-gaps i3blocks rofi feh)
-makedepends=('git sed')
+depends=('xorg-server' 'xorg-xinit' 'i3-gaps' 'i3blocks' 'rofi' 'feh')
+makedepends=('git' 'sed')
 optdepends=('xfce4-power-manager: Power management'
-            'networkmanager'
+            'networkmanager: NetworkManager support'
             'network-manager-applet: NetworkManager support'
             'playerctl: Volume key support'
             'xorg-xbacklight: Brightness key support'
@@ -24,7 +24,7 @@ optdepends=('xfce4-power-manager: Power management'
 
 provides=("$_pkgname")
 conflicts=("$_pkgname")
-source=("git+ssh://git@bitbucket.org/wiltech/fws-i3-config.git")
+source=("$_pkgname::git+https://gitlab.com/wiltech/fws-i3-config.git")
 md5sums=('SKIP')
 
 sysconf=/etc
